@@ -9,16 +9,30 @@ import ProductList from './components/ProductList';
 
 import './App.css';
 
-const BASEURL = "https://apigw.mweb.co.za/prod/baas/proxy";
-const campaignsURL = `${BASEURL}/marketing/campaigns/fibre?channels=120&visibility=public`;
-/*const staticProviders = {all: ["OpenServe","Balwin","Web Connect","TT Connect","Thinkspeed","MFN NOVA","Octotel","Vodacom","Lightstruck","MFN","Frogfoot Air","ClearAccess","Vumatel","Zoomfibre","FrogFoot","Evotel"
-], prepaidFibre: ['Vuma Reach']
-};*/
+const BASEURL = "https://apigw.mweb.co.za/prod/baas/proxy/";
+const campaignsURL = `${BASEURL}marketing/campaigns/fibre?channels=120&visibility=public`;
+// const staticProviders = {all: ["OpenServe","Balwin","Web Connect","TT Connect","Thinkspeed","MFN NOVA","Octotel","Vodacom","Lightstruck","MFN","Frogfoot Air","ClearAccess","Vumatel","Zoomfibre","FrogFoot","Evotel"
+// ], prepaidFibre: ['Vuma Reach']
+// };
 
-const getSummarizedProduct = ({ productCode, productName, productRate, subcategory }) => {
+
+
+const getSummarizedProduct = ({productCode, productName, productRate, subcategory}) => {
   const provider = subcategory.replace('Uncapped', '').replace('Capped', '').trim();
-  return {productCode, productName, productRate, provider}
+  return {productCode, productName, productRate, provider};
 };
+
+const getProductsFromPromo = (pc) => {
+  const promoCode = pc.promoCode;
+  return pc.products.map(product => ({
+    ...getSummarizedProduct(product),promoCode
+  }));
+}
+
+
+
+
+
 
 
 
@@ -26,39 +40,51 @@ function App() {
   const [selectedCampaignCode, setSelectedCampaignCode] = useState(null);
   const [selectedProviders, setSelectedProviders] =useState([]); 
   const [selectedPriceRange, setSelectedPriceRange] = useState([]);
-  const [providers] = useState( ["OpenServe", "Balwin", "Web Connect", "TT Connect", "Thinkspeed", "MFN NOVA",
-     "Octotel", "Vodacom", "Lightstruck", "MFN", "Frogfoot Air", "ClearAccess", "Vumatel", "ZoomFibre", "Frogfoot", "Evotel"]);
+  const [providers, setProviders] = useState( []);
   const [campaigns, setCampaigns] = useState([]);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+
 
 
   useEffect(() => {
     fetch(campaignsURL)
       .then(response => response.json())
       .then(data => {
+        console.log('Fetched data:', data);
         setCampaigns(data.campaigns || []);
       })
       .catch(error => console.error('Error fetching data:', error));
-  }, []);
+  }, []);
 
   useEffect(() =>{
     if (selectedCampaignCode) {   
+      
       const selectedCampaign = campaigns.filter(c => c.code === selectedCampaignCode)[0];
       if (selectedCampaign) {
-        const promoCodes = selectedCampaign.promoCodes || [];
-    
-        if (promoCodes.length > 0) {
-          const promoCodesString = promoCodes.join(',');
-          const promocodeProductsURL = `${BASEURL}/marketing/products/promos/${promoCodesString}?sellable_online=true`; //JOIN PROMO CODES, IF MULTIPLE OPTIONS ARE CHOSEN
-          console.log('Fetching url:', promocodeProductsURL);
+        const promocodes = selectedCampaign.promocodes || [];
+        console.log('promo data:', promocodes);
+        if (promocodes.length > 0) {
+          const promcodeProductsURL = `${BASEURL}marketing/products/promos/${promocodes.join(',')}?sellable_online=true`; //JOIN PROMO CODES, IF MULTIPLE OPTIONS ARE CHOSEN
+          console.log('Fetching url:', promcodeProductsURL);
 
-          fetch(promocodeProductsURL)
+          fetch(promcodeProductsURL)
             .then(response => response.json())
-            .then(data => {
-              console.log("API RESPONSE:", data);
-              const products = data.products || [];
-              setProducts(products.map(product => getSummarizedProduct(product))); //filter and summarize products
+            .then(promocodeProducts => {
+              console.log("Promocode products:", promocodeProducts);
+
+
+              const summarizedProducts = promocodeProducts.reduce((prods, pc) => [...prods, ...getProductsFromPromo(pc)], []);
+              console.log('Summarized Products:', summarizedProducts);
+              const providerList = [...new Set(summarizedProducts.map(p => p.provider))];
+              console.log('providers list:', providerList);
+              setProviders(providerList);
+              setProducts(summarizedProducts);
+              
+              
+              
+              
           })
           .catch(error => console.error('Error fetching products:', error));
         }
@@ -88,9 +114,9 @@ function App() {
   };
 
   const handleCampaignChange = (campaignCode) => {
-    console.log('selected campaign:', campaignCode);
-    setSelectedCampaignCode(campaignCode);
     
+    setSelectedCampaignCode(campaignCode);
+    console.log('selected campaign:', campaignCode);
   };
 
 
@@ -117,7 +143,8 @@ function App() {
         setSelectedPriceRange={setSelectedPriceRange}
       />
 
-      <ProductList products={filteredProducts}/>  
+      <ProductList products={filteredProducts}/>
+      {/* <pre>{JSON.stringify(providers, null, 2)}</pre>   */}
     </div>
   );
 }
