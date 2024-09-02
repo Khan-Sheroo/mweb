@@ -5,21 +5,25 @@ import CampaignSelector from './components/CampaignSelector';
 import ProviderSelector from './components/ProviderSelector';
 import PriceRangeFilter from './components/PriceRangeFilter';
 import ProductList from './components/ProductList';
+import providerInfo from './components/providerInfo';
+import ProviderLogos from './components/ProviderLogos';
+import mweb from './components/images/mweb.jpg';
 
 
 import './App.css';
 
 const BASEURL = "https://apigw.mweb.co.za/prod/baas/proxy/";
 const campaignsURL = `${BASEURL}marketing/campaigns/fibre?channels=120&visibility=public`;
-// const staticProviders = {all: ["OpenServe","Balwin","Web Connect","TT Connect","Thinkspeed","MFN NOVA","Octotel","Vodacom","Lightstruck","MFN","Frogfoot Air","ClearAccess","Vumatel","Zoomfibre","FrogFoot","Evotel"
-// ], prepaidFibre: ['Vuma Reach']
-// };
 
 
 
-const getSummarizedProduct = ({productCode, productName, productRate, subcategory}) => {
+
+const getSummarizedProduct = ({productCode, productName, productRate, subcategory, logo}) => {
   const provider = subcategory.replace('Uncapped', '').replace('Capped', '').trim();
-  return {productCode, productName, productRate, provider};
+  const providerLogo = providerInfo.find(p => p.name.toLowerCase() === provider.toLowerCase())?.url || 'src/fibre.jpg';
+  console.log('Provider:', provider, 'Provider Logo:', providerLogo);
+  return {productCode, productName, productRate, provider, providerLogo};
+  
 };
 
 const getProductsFromPromo = (pc) => {
@@ -32,10 +36,6 @@ const getProductsFromPromo = (pc) => {
 
 
 
-
-
-
-
 function App() {
   const [selectedCampaignCode, setSelectedCampaignCode] = useState(null);
   const [selectedProviders, setSelectedProviders] =useState([]); 
@@ -44,7 +44,8 @@ function App() {
   const [campaigns, setCampaigns] = useState([]);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+  
+  
 
 
 
@@ -52,8 +53,12 @@ function App() {
     fetch(campaignsURL)
       .then(response => response.json())
       .then(data => {
+        const fetchedCampaigns = data.campaigns || [];
+        setCampaigns(fetchedCampaigns);
+        if (fetchedCampaigns.length > 0) {
+          setSelectedCampaignCode(fetchedCampaigns[0].code);
+        }
         console.log('Fetched data:', data);
-        setCampaigns(data.campaigns || []);
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
@@ -92,6 +97,11 @@ function App() {
     }
   },[selectedCampaignCode, campaigns]);
 
+ 
+
+
+  
+
   //FILTER PRODUCTS ON PROVIDERS AND PRICE RANGE
   useEffect(() => {
     const filtered = products.filter(product => {
@@ -109,8 +119,9 @@ function App() {
     setFilteredProducts(filtered);
   }, [selectedProviders, selectedPriceRange, products]);
 
-  const handleProviderChange = (updatedProviders) => {
-    setSelectedProviders(updatedProviders);
+
+  const handleProviderChange = (providerCode) => {
+    setSelectedProviders(providerCode);
   };
 
   const handleCampaignChange = (campaignCode) => {
@@ -123,28 +134,36 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Fibre Products</h1>
-        <p>Select a fibre infrastructure provider below,browse the products available and complete a coverage search</p>
+        <h1>
+          <img src={mweb} alt='logo' style={{ height: 'auto', width: '150%'  }}/>
+        </h1>
+      
+        
       </header>
+      <ProviderLogos 
+      providerInfo={providerInfo}/>
+
+    <div className="selectors-container">
       <CampaignSelector
         campaigns={campaigns}
         selectedCampaignCode = {selectedCampaignCode}
         setSelectedCampaignCode = {handleCampaignChange}
       />
 
+      <PriceRangeFilter
+        selectedPriceRange={selectedPriceRange}
+        setSelectedPriceRange={setSelectedPriceRange}
+      />
+    </div>
+
       <ProviderSelector
         providers={providers}
         selectedProviders={selectedProviders}
         handleProviderChange={handleProviderChange}
       />
-
-      <PriceRangeFilter
-        selectedPriceRange={selectedPriceRange}
-        setSelectedPriceRange={setSelectedPriceRange}
+  
+      <ProductList products={filteredProducts}
       />
-
-      <ProductList products={filteredProducts}/>
-      {/* <pre>{JSON.stringify(providers, null, 2)}</pre>   */}
     </div>
   );
 }

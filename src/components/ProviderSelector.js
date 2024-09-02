@@ -8,12 +8,14 @@ const ProviderSelector = ({providers, selectedProviders, handleProviderChange })
 
         handleProviderChange(updatedProviders);
     };
+    
         return (
+            
             <div>
                 <h2>Select Fibre Providers</h2>
-                <form>
+                <form className='provider-form'>
                     {providers.map(provider =>(
-                        <div key={provider}>
+                        <div key={provider} className='provider-checkbox'>
                             <input
                                 type="checkbox"
                                 id={provider}

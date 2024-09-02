@@ -1,33 +1,154 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  background-color:rgb(243, 248, 248)
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color:#255d7e;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 15px;
+  margin-top: -10%;
+  padding-right: 15%;
+}
+
+ 
+
+.placeHolderImage{
+  object-fit: contain;
+}
+
+.App-header h1{
+  color: #fff;
+  padding-bottom: 6%;
+}
+
+.App p {
+  font-size: 15px;
+  color: #09090992;
+  margin-top: -8%;
+}
+
+.provider-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* Space between logos */
+  justify-content: center; /* Center logos horizontally */
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 3%;
+  opacity: 50%;
+}
+
+.provider-logo {
+  width: 20%; /* Adjust size as needed */
+  height: 5%;
+}
+
+.selectors-container{
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 80px;
+  
+  
+}
+.price-range-select,
+.campaign-select {
+  padding: 30px;
+  background-color: #4485c1;
+  color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-emphasis-color: white;
+  
+}
+
+h2 {
+  padding-top: 2%;
+  color: #363638;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.provider-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 3%;
+  padding-top: 2%;
+
+}
+
+.provider-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.provider-checkbox input[type="checkbox"] {
+  margin-right: 5px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
+ .product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 16px;
+  padding: 16px;
+  padding-top: 10px;
+  width: 350px;
+  height: 100px;
+  text-align: left;
+  transition: transform 0.2s;
+  align-items: center;
+}
+
+.product-info {
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.product-info h3 {
+  font-size: 13px;
+  margin-right: 2%;
+}
+
+.product-info p {
+  margin: 0;
+  
+  
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.provider-logo{
+  width: auto;
+  height: auto;
+  margin-right: 16px;
+  object-fit: contain;
+}
+ 
 
 @keyframes App-logo-spin {
   from {

@@ -1,26 +1,23 @@
 import React from 'react';
 
 const CampaignSelector =({ campaigns, selectedCampaignCode, setSelectedCampaignCode}) => {
+    const handleCampaignChange = (e) => {
+        setSelectedCampaignCode(e.target.value);
+    };
+    
     return (
         <div>
-            <h2>Select Fibre Campaign</h2>
-            <form>
+            <select value={selectedCampaignCode} onChange={handleCampaignChange} className='campaign-select'>
+                <option value=''>Select a campaign</option>
                 {campaigns.map(campaign => (
-                    <div key={campaign.code}>
-                        <input
-                            type="radio"
-                            id={campaign.code}
-                            name="campaign"
-                            value={campaign.code}
-                            checked={selectedCampaignCode === campaign.code}
-                            onChange={() => setSelectedCampaignCode(campaign.code)}
-                        />
-                        <label htmlFor={campaign.code}>{campaign.name}</label>
-                    </div>
+                    <option key={campaign.code} value={campaign.code}>
+                        {campaign.name}
+                    </option>
                 ))}
-            </form>
+            </select>
         </div>
     );
 };
+       
 
 export default CampaignSelector;
