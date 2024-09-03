@@ -1,6 +1,6 @@
-
+//Base url for collecting logos
 const logoBaseURL = "https://www.mweb.co.za/media/images/providers";
-
+// Array of provider information, including code, name, and logo URL - A FEW URLS ARE MISSING WHICH WE WILL WILL HANDLE IN THE LOGIC
 const providerInfo = [
     {
       code: 'centurycity',

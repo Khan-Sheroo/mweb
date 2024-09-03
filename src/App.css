@@ -1,160 +1,181 @@
+/* General App Styles */
 .App {
-  background-color:rgb(243, 248, 248)
+  background-color: rgb(243, 248, 248); /* Light background color for the app */
 }
 
+/* Header Styles */
 .App-header {
-  background-color:#255d7e;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  margin-top: -10%;
-  padding-right: 15%;
+  background-color: #255d7e; /* Dark blue background for the header */
+  color: #fff; /* White text color */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  font-size: 15px; /* Font size for header text */
+  margin-top: -10%; /* Negative margin to adjust header position */
+  padding-right: 15%; /* Padding on the right */
 }
 
- 
-
-.placeHolderImage{
-  object-fit: contain;
+.App-header h1 {
+  color: #fff; /* White color for the header title */
+  padding-bottom: 6%; /* Space below the header title */
 }
 
-.App-header h1{
-  color: #fff;
-  padding-bottom: 6%;
-}
-
+/* Paragraph Styles */
 .App p {
-  font-size: 15px;
-  color: #09090992;
-  margin-top: -8%;
+  font-size: 15px; /* Font size for paragraphs */
+  color: #09090992; /* Dark gray color with opacity */
+  margin-top: -8%; /* Negative margin to adjust paragraph position */
 }
 
+/* Provider Logos */
 .provider-logos {
-  display: flex;
-  flex-wrap: wrap;
+  display: flex; /* Flexbox layout */
+  flex-wrap: wrap; /* Wrap logos to next line if needed */
   gap: 12px; /* Space between logos */
   justify-content: center; /* Center logos horizontally */
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 3%;
-  opacity: 50%;
+  margin-left: 2%; /* Margin on the left */
+  margin-right: 2%; /* Margin on the right */
+  margin-top: 3%; /* Margin on top */
+  opacity: 50%; /* Reduced opacity for logos */
 }
 
-.provider-logo {
-  width: 20%; /* Adjust size as needed */
-  height: 5%;
+/* Logo Styles */
+.product-logo {
+  padding-top: 5%; /* Space above the product logo */
+  width: 80px; /* Fixed width for product logos */
+  height: auto; /* Auto height to maintain aspect ratio */
 }
 
-.selectors-container{
-  display: flex;
-  gap: 60px;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 80px;
-  
-  
+.placeholder-logo {
+  margin-right: 5%; /* Space to the right of the placeholder logo */
+  width: 60px; /* Fixed width for placeholder logo */
+  height: auto; /* Auto height to maintain aspect ratio */
 }
+
+/* Selectors Container */
+.selectors-container {
+  display: flex; /* Flexbox layout */
+  gap: 60px; /* Space between selectors */
+  justify-content: center; /* Center selectors horizontally */
+  margin-bottom: 20px; /* Margin below the selectors */
+  margin-top: 80px; /* Margin above the selectors */
+}
+
+/* Select Styles */
 .price-range-select,
 .campaign-select {
-  padding: 30px;
-  background-color: #4485c1;
-  color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-emphasis-color: white;
-  
+  padding: 30px; /* Padding inside the select elements */
+  background-color: #4485c1; /* Background color for selects */
+  color: #fff; /* White text color */
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  text-emphasis-color: white; /* Text emphasis color */
 }
 
+/* Heading Styles */
 h2 {
-  padding-top: 2%;
-  color: #363638;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  padding-top: 2%; /* Space above the heading */
+  color: #363638; /* Dark gray color for heading text */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font family for headings */
 }
 
+/* Provider Form */
 .provider-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 3%;
-  padding-top: 2%;
-
+  display: flex; /* Flexbox layout */
+  flex-wrap: wrap; /* Wrap form elements to next line if needed */
+  gap: 10px; /* Space between form elements */
+  margin-left: 5%; /* Margin on the left */
+  margin-right: 5%; /* Margin on the right */
+  margin-bottom: 3%; /* Margin below the form */
+  padding-top: 2%; /* Padding above the form */
 }
 
+/* Provider Checkbox */
 .provider-checkbox {
-  display: flex;
-  align-items: center;
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Align checkbox and label vertically */
 }
 
 .provider-checkbox input[type="checkbox"] {
-  margin-right: 5px;
+  margin-right: 5px; /* Space to the right of the checkbox */
 }
 
+/* Link Styles */
 .App-link {
-  color: #61dafb;
+  color: #61dafb; /* Link color */
 }
 
- .product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+/* Product List */
+.product-list {
+  display: flex; /* Flexbox layout */
+  flex-wrap: wrap; /* Wrap product cards to next line if needed */
+  justify-content: space-around; /* Distribute product cards evenly */
 }
 
-
-
+/* Product Card */
 .product-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 16px;
-  padding: 16px;
-  padding-top: 10px;
-  width: 350px;
-  height: 100px;
-  text-align: left;
-  transition: transform 0.2s;
-  align-items: center;
+  background-color: #fff; /* White background color for card */
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  margin: 16px; /* Margin around the card */
+  padding: 18px; /* Padding inside the card */
+  padding-top: 10px; /* Additional padding at the top */
+  width: 400px; /* Fixed width for card */
+  height: 200px; /* Fixed height for card */
+  transition: transform 0.2s; /* Smooth transition for hover effect */
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text */
 }
 
 .product-info {
-  padding-top: 30px;
-  display: flex;
-  align-items: center;
+  padding-top: 10px; /* Space above the product info */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Align items vertically */
 }
 
 .product-info h3 {
-  font-size: 13px;
-  margin-right: 2%;
+  font-size: 13px; /* Font size for product name */
+  margin: 20px; /* Margin around the product name */
 }
 
 .product-info p {
-  margin: 0;
-  
-  
+  margin-left: 10px; /* Space to the left of the product price */
+  padding-top: 45px; /* Space above the product price */
 }
 
+/* Product Card Hover Effect */
 .product-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Scale up card on hover */
 }
 
-.provider-logo{
-  width: auto;
-  height: auto;
-  margin-right: 16px;
-  object-fit: contain;
+/* Provider Logo */
+.provider-logo {
+  width: auto; /* Auto width for logo */
+  height: auto; /* Auto height to maintain aspect ratio */
+  margin-right: 16px; /* Space to the right of the logo */
+  object-fit: contain; /* Maintain aspect ratio */
+  padding-top: 10px; /* Space above the logo */
 }
- 
 
+/* Check Coverage Button */
+.check-coverage-button {
+  margin-top: 30px; /* Space above the button */
+  background-color: rgba(255, 0, 0, 0.528); /* Red background with transparency */
+  color: #fff; /* White text color */
+  border-radius: 8px; /* Rounded corners */
+  border-color: #fff; /* White border color */
+  box-shadow: 0 2px 4px rgba(254, 254, 254, 0.922); /* Shadow effect */
+}
+
+/* Keyframes for Spinning Animation */
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg); /* Start rotation from 0 degrees */
   }
   to {
-    transform: rotate(360deg);
-  }
+    transform: rotate(360deg); /* Rotate to 360 degrees */
+}
 }
