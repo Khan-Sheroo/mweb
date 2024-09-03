@@ -116,7 +116,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>
-          <img src={mweb} alt='logo' style={{ height: 'auto', width: '150%' }} />
+          <img src={mweb} alt='logo' style={{ height: 'auto', width: '120%' }} />
         </h1>
       </header>
       <ProviderLogos providerInfo={providerInfo} />
