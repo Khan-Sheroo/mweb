@@ -12,8 +12,8 @@
   align-items: center; /* Center children horizontally */
   justify-content: center; /* Center children vertically */
   font-size: 15px; /* Font size for header text */
-  margin-top: -10%; /* Negative margin to adjust header position */
-  padding-right: 15%; /* Padding on the right */
+  margin-top: 0%; /* Negative margin to adjust header position */
+  padding-right: 20%; /* Padding on the right */
 }
 
 .App-header h1 {
@@ -177,5 +177,10 @@ h2 {
   }
   to {
     transform: rotate(360deg); /* Rotate to 360 degrees */
+
+
+  }
 }
-}
+
+
+
