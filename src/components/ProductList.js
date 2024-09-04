@@ -22,7 +22,7 @@ const ProductList = ({ products }) => {
                         />
                         <div className="product-info">
                             <h3>{product.productName}</h3>
-                            <p><b>R{product.productRate}pm</b></p>  
+                            <p><b>R{parseFloat(product.productRate).toFixed(2)}pm</b></p>  
                              
                         </div>
                         <button className="check-coverage-button">Check Coverage</button> 
